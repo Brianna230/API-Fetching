@@ -37,6 +37,11 @@ async function initialLoad() {
   }
 }
 initialLoad();
+
+function clearCarousel(){
+  breedSelect.textContent = " "
+}
+clearCarousel()
 // console.log("test");
 
 // live_8UaLuIIW2nk6xoNn8bv1iLb2XWYf0A0tm765eNkeYDaDErWjzYpm8mNZMsTIKU5l
@@ -57,18 +62,47 @@ initialLoad();
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 // https://cdn2.thecatapi.com/images/UCifm-g71.jpg
-breedSelect.addEventListener("change", (event) => {
+breedSelect.addEventListener("change", async (event) => {
   // event.preventDefault();
   const breedId = event.target.value;
-  fetch(
-    `http://api.thecatapi.com/v1/images/search?limit=100&breed_ids=${breedId}&api_key=live_8UaLuIIW2nk6xoNn8bv1iLb2XWYf0A0tm765eNkeYDaDErWjzYpm8mNZMsTIKU5l`
+  const response = await fetch(`http://api.thecatapi.com/v1/images/search?limit=100&breed_ids=${breedId}&api_key=live_8UaLuIIW2nk6xoNn8bv1iLb2XWYf0A0tm765eNkeYDaDErWjzYpm8mNZMsTIKU5l`
+);
+const value = await response.json();
+// const catUrl = value[0].url
+console.log(value);
 
-  )
-    .then((value) => value.json())
-    .then((value) => {
-      console.log(value);
-    });
+ const carousel1 = document.querySelector(".carousel")
+ console.log(carousel1)
+//  breedSelect.appendChild(carousel1)
+ const infoDump1 = document.getElementById("infoDump")
+ console.log(infoDump1)
+ infoDump1.textContent = "Info Section"
+ infoDump1.appendChild(carousel1)
+
 });
+//  const carousel1 = document.querySelector(".carousel")
+//  console.log(carousel1)
+//  breedSelect.appendChild(carousel1)
+//  const infoDump1 = document.getElementById("infoDump")
+//  console.log(infoDump1)
+//  infoDump1.textContent = "Info Section"
+//  infoDump1.appendChild(carousel1)
+
+
+
+  // fetch(
+  //   `http://api.thecatapi.com/v1/images/search?limit=100&breed_ids=${breedId}&api_key=live_8UaLuIIW2nk6xoNn8bv1iLb2XWYf0A0tm765eNkeYDaDErWjzYpm8mNZMsTIKU5l`
+
+  // )
+  //   .then((value) => value.json())
+  //   .then((value) => {
+  //     console.log(value);
+
+
+ 
+
+    // });
+// });
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -126,26 +160,26 @@ breedSelect.addEventListener("change", (event) => {
 
 export async function favourite(imgId) {
   // your code here
-  const response = await fetch("https://api.thecatapi.com/v1/images/search")
-  const data = await response.json();
-  console.log(data)
-  const catImg = data[0].url;
-  const imgs = document.querySelector('img')
-  console.log(imgs)
+  // const response = await fetch("https://api.thecatapi.com/v1/images/search")
+  // const data = await response.json();
+  // console.log(data)
+  // const catImg = data[0].url;
+  // const imgs = document.querySelector('img')
+  // console.log(imgs)
   
-  imgs.src = catImg;
+  // imgs.src = catImg;
 
-  const button = document.querySelector(".favourite-button")
-  button.addEventListener("click", async() =>{
-    const response = await fetch("https://api.thecatapi.com/v1/images/search")
-    const data = await response.json()
-    const catImg = data[0].url;
-    imgs.src = catImg;
-  })
+  // const button = document.querySelector(".favourite-button")
+  // button.addEventListener("click", async() =>{
+  //   const response = await fetch("https://api.thecatapi.com/v1/images/search")
+  //   const data = await response.json()
+  //   const catImg = data[0].url;
+  //   imgs.src = catImg;
+  // })
 
  
 }
-favourite()
+// favourite()
 
 
 /**
